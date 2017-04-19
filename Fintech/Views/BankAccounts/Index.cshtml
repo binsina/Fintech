@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Fintech.Models.ModelClass.BankAccount>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create","BankAccount", new { HouseHoldId = Model.Select(model=> model.HouseHoldId)})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HouseHold.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReconciledBalance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoftDelete)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HouseHold.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReconciledBalance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoftDelete)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })|
+            @Html.ActionLink("Transaction","Index","BankAccounts",new { BankAccountId = item.Id}, new { @class="btn btn-primary"})
+        </td>
+    </tr>
+}
+
+</table>
