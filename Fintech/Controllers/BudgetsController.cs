@@ -16,10 +16,19 @@ namespace Fintech.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Budgets
-        public ActionResult Index()
+        public ActionResult Index(int HouseHoldId)
         {
-            var budgets = db.Budgets.Include(b => b.HouseHold);
-            return View(budgets.ToList());
+            BudgetViewModels model = new BudgetViewModels();
+
+            var budgets = db.Budgets
+                .Where(b=> b.HouseHoldId == HouseHoldId )
+                .Include(b => b.HouseHold);
+            model.HouseHoldId = HouseHoldId;
+            model.Bud = budgets.ToList();
+
+            return View(model);
+
+            //return View(budgets.ToList());
         }
 
         // GET: Budgets/Details/5
@@ -38,10 +47,13 @@ namespace Fintech.Controllers
         }
 
         // GET: Budgets/Create
-        public ActionResult Create()
+        public ActionResult Create(int HouseHoldId)
         {
+            Budget budget = new Budget();
+            budget.HouseHoldId = HouseHoldId;
             ViewBag.HouseHoldId = new SelectList(db.HouseHolds, "Id", "Name");
-            return View();
+
+            return View(budget);
         }
 
         // POST: Budgets/Create
@@ -55,7 +67,7 @@ namespace Fintech.Controllers
             {
                 db.Budgets.Add(budget);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { HouseHoldId = budget.HouseHoldId});
             }
 
             ViewBag.HouseHoldId = new SelectList(db.HouseHolds, "Id", "Name", budget.HouseHoldId);

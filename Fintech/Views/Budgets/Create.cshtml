@@ -1,8 +1,5 @@
 ﻿@model Fintech.Models.ModelClass.Budget
 
-@{
-    ViewBag.Title = "Create";
-}
 
 <h2>Create</h2>
 
@@ -10,6 +7,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.HouseHoldId)
     
     <div class="form-horizontal">
         <h4>Budget</h4>
@@ -23,13 +21,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HouseHoldId, "HouseHoldId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("HouseHoldId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.HouseHoldId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Fintech.Models.ModelClass.Transaction>
+﻿@*@model IEnumerable<Fintech.Models.ModelClass.Transaction>*@
+
+@model Fintech.Models.TransactionViewModels
+
 
 @{
     ViewBag.Title = "Index";
@@ -7,47 +10,47 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Transaction","Create","Transaction", new { BankAccountId = Model.Select(model => model.BankAccountId) }, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Transaction","Create","Transactions",new {BankAccountId = Model.BankAccountId }, new { @class = "btn btn-primary"})
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BankAccount.Name)
+            @Html.DisplayName("Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            @Html.DisplayName("Category")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EnteredBy.FirstName)
+            @Html.DisplayName("EnteredBy")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayName("Description")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayName("Date")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Amount)
+            @Html.DisplayName("Amount")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayName("Type")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserId)
+            @Html.DisplayName("User")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Reconciled)
+            @Html.DisplayName("Reconciled")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SoftDelete)
+            @Html.DisplayName("SoftDelete")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ReconciledAmount)
+            @Html.DisplayName("ReconciledAmount")
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.TA) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.BankAccount.Name)
@@ -56,31 +59,31 @@
             @Html.DisplayFor(modelItem => item.Category.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EnteredBy.FirstName)
+            @Html.DisplayFor(modelItem => item.EnteredBy.FullName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @item.Description
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Date)
+            @item.Date
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Amount)
+            @item.Amount
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
+            @item.Type
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserId)
+            @item.UserId
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Reconciled)
+            @item.Reconciled
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SoftDelete)
+            @item.SoftDelete
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ReconciledAmount)
+            @item.ReconciledAmount
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

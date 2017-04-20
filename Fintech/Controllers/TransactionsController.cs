@@ -17,10 +17,22 @@ namespace Fintech.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Transactions
-        public ActionResult Index()
+        public ActionResult Index(int BankAccountId)
         {
-            var transactions = db.Transactions.Include(t => t.BankAccount).Include(t => t.Category).Include(t => t.EnteredBy);
-            return View(transactions.ToList());
+            TransactionViewModels model = new TransactionViewModels();
+
+            var transactions = db.Transactions
+                .Where(m=>m.BankAccountId == BankAccountId)
+                .Include(t => t.BankAccount)
+                .Include(t => t.Category)
+                .Include(t => t.EnteredBy);
+
+            model.TA = transactions.ToList();
+
+            model.BankAccountId = BankAccountId;
+
+            return View(model);
+            //return View(transactions.ToList());
         }
 
         // GET: Transactions/Details/5
@@ -41,10 +53,12 @@ namespace Fintech.Controllers
         // GET: Transactions/Create
         public ActionResult Create(int BankAccountId)
         {
+            
+
             Transaction transaction = new Transaction();
             transaction.BankAccountId = BankAccountId;
 
-            ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "Name");
+         
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             ViewBag.EnteredById = new SelectList(db.Users, "Id", "FirstName");
             return View();
@@ -63,7 +77,8 @@ namespace Fintech.Controllers
                 transaction.Date = DateTime.Now;
                 db.Transactions.Add(transaction);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { BankAccountId = transaction.BankAccountId });
+                //return RedirectToAction("Index");
             }
 
             ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "Name", transaction.BankAccountId);

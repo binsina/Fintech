@@ -16,11 +16,22 @@ namespace Fintech.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BudgetItems
-        public ActionResult Index()
+        public ActionResult Index(int BudgetId)
         {
-            var budgetItems = db.BudgetItems.Include(b => b.Budget).Include(b => b.Category);
-            return View(budgetItems.ToList());
+            BudgetItemViewModels model = new BudgetItemViewModels();
+
+            var budgetItems = db.BudgetItems
+                .Where(n=> n.BudgetId == BudgetId)
+                .Include(b => b.Budget).
+                Include(b => b.Category);
+            model.BudgetId = BudgetId;
+            
+            model.BudItem = budgetItems.ToList();
+
+            return View(model);
+            //return View(budgetItems.ToList());
         }
+
 
         // GET: BudgetItems/Details/5
         public ActionResult Details(int? id)
@@ -38,8 +49,11 @@ namespace Fintech.Controllers
         }
 
         // GET: BudgetItems/Create
-        public ActionResult Create()
+        public ActionResult Create(int BudgetId)
         {
+            BudgetItem budgetItem = new BudgetItem();
+            budgetItem.BudgetId = BudgetId;
+           
             ViewBag.BudgetId = new SelectList(db.Budgets, "Id", "Name");
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             return View();
@@ -56,7 +70,7 @@ namespace Fintech.Controllers
             {
                 db.BudgetItems.Add(budgetItem);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { BudgetId = budgetItem.BudgetId});
             }
 
             ViewBag.BudgetId = new SelectList(db.Budgets, "Id", "Name", budgetItem.BudgetId);

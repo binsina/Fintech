@@ -16,10 +16,19 @@ namespace Fintech.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BankAccounts
-        public ActionResult Index()
+        public ActionResult Index(int HouseHoldId)
         {
-            var bankAccounts = db.BankAccounts.Include(b => b.HouseHold);
-            return View(bankAccounts.ToList());
+            BankAccountViewModels model = new BankAccountViewModels();
+
+            var bankAccounts = db.BankAccounts
+                .Where(m => m.HouseHoldId == HouseHoldId)
+                .Include(b => b.HouseHold);
+               
+            model.BA = bankAccounts.ToList();
+            model.HouseHoldId = HouseHoldId;
+            return View(model);
+
+            //return View(bankAccounts.ToList());
         }
 
         // GET: BankAccounts/Details/5
@@ -43,8 +52,8 @@ namespace Fintech.Controllers
             BankAccount bankAccount = new BankAccount();
             bankAccount.HouseHoldId = HouseHoldId;
 
-            ViewBag.HouseHoldId = new SelectList(db.HouseHolds, "Id", "Name");
-            return View();
+
+            return View(bankAccount);
         }
 
         // POST: BankAccounts/Create
@@ -61,7 +70,8 @@ namespace Fintech.Controllers
 
                 db.BankAccounts.Add(bankAccount);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Index", new { HouseHoldId = bankAccount.HouseHoldId });
             }
 
             ViewBag.HouseHoldId = new SelectList(db.HouseHolds, "Id", "Name", bankAccount.HouseHoldId);

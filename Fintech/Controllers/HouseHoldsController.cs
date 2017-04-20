@@ -18,6 +18,7 @@ namespace Fintech.Controllers
         // GET: HouseHolds
         public ActionResult Index()
         {
+
             return View(db.HouseHolds.ToList());
         }
 
