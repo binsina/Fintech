@@ -61,7 +61,7 @@ namespace Fintech.Controllers
          
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             ViewBag.EnteredById = new SelectList(db.Users, "Id", "FirstName");
-            return View();
+            return View(transaction);
         }
 
         // POST: Transactions/Create

@@ -56,7 +56,7 @@ namespace Fintech.Controllers
            
             ViewBag.BudgetId = new SelectList(db.Budgets, "Id", "Name");
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
-            return View();
+            return View(budgetItem);
         }
 
         // POST: BudgetItems/Create

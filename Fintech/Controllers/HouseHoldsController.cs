@@ -8,19 +8,23 @@ using System.Web;
 using System.Web.Mvc;
 using Fintech.Models;
 using Fintech.Models.ModelClass;
+using Microsoft.AspNet.Identity;
+using Fintech.HelperClass;
 
 namespace Fintech.Controllers
 {
     public class HouseHoldsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        
         // GET: HouseHolds
         public ActionResult Index()
         {
+           
 
-            return View(db.HouseHolds.ToList());
+                return View(db.HouseHolds.ToList());
         }
+          
 
         // GET: HouseHolds/Details/5
         public ActionResult Details(int? id)
@@ -49,9 +53,16 @@ namespace Fintech.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] HouseHold houseHold)
+
         {
+            
+            
+
             if (ModelState.IsValid)
             {
+                var user = (User.Identity.GetUserId());
+               
+
                 db.HouseHolds.Add(houseHold);
                 db.SaveChanges();
                 return RedirectToAction("Index");

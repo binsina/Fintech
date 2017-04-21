@@ -179,8 +179,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelperClass\AddUserToProject.cs" />
+    <Compile Include="HelperClass\ImageUploadValidator.cs" />
+    <Compile Include="HelperClass\UserRolesHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AuthorizeHouseHold.cs" />
     <Compile Include="Models\BankAccountViewModels.cs" />
     <Compile Include="Models\BudgetItemViewModels.cs" />
     <Compile Include="Models\BudgetViewModels.cs" />
@@ -190,6 +194,7 @@
     <Compile Include="Models\CodeFirst\Category.cs" />
     <Compile Include="Models\CodeFirst\HouseHold.cs" />
     <Compile Include="Models\CodeFirst\Transaction.cs" />
+    <Compile Include="Models\HouseHoldToUserViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\TransactionViewModels.cs" />
@@ -205,6 +210,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Private.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

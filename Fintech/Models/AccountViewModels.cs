@@ -1,3 +1,4 @@
+using Fintech.Models.ModelClass;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -80,8 +81,7 @@ namespace Fintech.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "UserPhoto")]
-        public byte[] UserPhoto { get; set; }
+        
 
         [Display(Name = "FirstName")]
         public string FirstName { get; set; }
@@ -89,8 +89,7 @@ namespace Fintech.Models
         [Display(Name = "LastName")]
         public string LastName { get; set; }
 
-        [Display(Name = "DisplayName")]
-        public string DisplayName { get; set; }
+       
 
 
 

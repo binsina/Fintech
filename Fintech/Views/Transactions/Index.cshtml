@@ -10,7 +10,10 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Transaction","Create","Transactions",new {BankAccountId = Model.BankAccountId }, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Create Transaction","Create","Transactions",new {BankAccountId = Model.BankAccountId }, new { @class = "btn btn-primary"})
+</p>
+<p>
+    @Html.ActionLink("Back to HouseHold","Index","HouseHolds",null, new { @class ="btn btn-primary"})
 </p>
 <table class="table">
     <tr>
@@ -41,9 +44,9 @@
         <th>
             @Html.DisplayName("Reconciled")
         </th>
-        <th>
+        @*<th>
             @Html.DisplayName("SoftDelete")
-        </th>
+        </th>*@
         <th>
             @Html.DisplayName("ReconciledAmount")
         </th>
@@ -79,16 +82,16 @@
         <td>
             @item.Reconciled
         </td>
-        <td>
+        @*<td>
             @item.SoftDelete
-        </td>
+        </td>*@
         <td>
             @item.ReconciledAmount
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id },new { @class ="btn btn-primary"})|
+            @Html.ActionLink("Details", "Details", new { id=item.Id },new { @class ="btn btn-primary"}) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BankAccountId },new { @class ="btn btn-primary"})
         </td>
     </tr>
 }

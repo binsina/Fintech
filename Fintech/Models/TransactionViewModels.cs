@@ -10,5 +10,7 @@ namespace Fintech.Models
     {
         public int BankAccountId { get; set; }
         public List<Transaction> TA { get; set; }
+        public BankAccount BankAccount { get; set; }
+        public int HouseHoldId { get; set; }
     }
 }

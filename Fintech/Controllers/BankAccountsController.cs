@@ -30,7 +30,7 @@ namespace Fintech.Controllers
 
             //return View(bankAccounts.ToList());
         }
-
+        
         // GET: BankAccounts/Details/5
         public ActionResult Details(int? id)
         {
@@ -47,6 +47,7 @@ namespace Fintech.Controllers
         }
 
         // GET: BankAccounts/Create
+        
         public ActionResult Create(int HouseHoldId)
         {
             BankAccount bankAccount = new BankAccount();
@@ -105,20 +106,21 @@ namespace Fintech.Controllers
             {
                 db.Entry(bankAccount).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {HouseHoldId = bankAccount.HouseHoldId });
+                
             }
             ViewBag.HouseHoldId = new SelectList(db.HouseHolds, "Id", "Name", bankAccount.HouseHoldId);
             return View(bankAccount);
         }
 
         // GET: BankAccounts/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? Id)
         {
-            if (id == null)
+            if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BankAccount bankAccount = db.BankAccounts.Find(id);
+            BankAccount bankAccount = db.BankAccounts.Find(Id);
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -129,12 +131,12 @@ namespace Fintech.Controllers
         // POST: BankAccounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int Id)
         {
-            BankAccount bankAccount = db.BankAccounts.Find(id);
+            BankAccount bankAccount = db.BankAccounts.Find(Id);
             db.BankAccounts.Remove(bankAccount);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { HouseHoldId = bankAccount.HouseHoldId });
         }
 
         protected override void Dispose(bool disposing)

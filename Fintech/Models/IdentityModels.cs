@@ -5,6 +5,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Fintech.Models.ModelClass;
 using System.Collections.Generic;
+using System.Security.Principal;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using System.Linq;
 
 namespace Fintech.Models
 {
@@ -21,18 +25,65 @@ namespace Fintech.Models
 
         public int HouseHoldId { get; set; }
 
-        public virtual HouseHold HouseHold { get; set; }
+        //public virtual HouseHold HouseHold { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+
+
+            userIdentity.AddClaim(new Claim("LastName", LastName));
+            userIdentity.AddClaim(new Claim("FirstName", FirstName));
+            userIdentity.AddClaim(new Claim("FullName", FullName));
+            //add User to an Object- in this case it is HouseHold object
+            userIdentity.AddClaim(new Claim("HouseHoldId", HouseHoldId.ToString()));
+
             // Add custom user claims here
             return userIdentity;
         }
+        public virtual HouseHold HouseHold { get; set; }
     }
 
+    public static class AuthExtensions
+    {
+        public static string GetHouseHoldId(this IIdentity user)
+        {
+            var claimsIdentity = (ClaimsIdentity)user;
+            var HouseHoldClaims = claimsIdentity.Claims.FirstOrDefault(m => m.Type == "HouseHoldId");
+            if (HouseHoldClaims != null)
+            {
+                return HouseHoldClaims.Value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool IsInHouseHoldId(this IIdentity user)
+        {
+            var HouseholdClaims = ((ClaimsIdentity)user).Claims.FirstOrDefault(m => m.Type == "HouseHoldId");
+            return HouseholdClaims != null && string.IsNullOrWhiteSpace(HouseholdClaims.Value);
+        }
+
+        public static async Task RefreshAuthentication(this HttpContextBase context, ApplicationUser user)
+        {
+            context.GetOwinContext().Authentication.SignOut();
+            await context.GetOwinContext().Get<ApplicationSignInManager>().SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+            
+        }
+
+
+
+
+
+    }
+
+    
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
@@ -53,7 +104,7 @@ namespace Fintech.Models
         public System.Data.Entity.DbSet<Fintech.Models.ModelClass.BudgetItem> BudgetItems { get; set; }
         public System.Data.Entity.DbSet<Fintech.Models.ModelClass.Transaction> Transactions { get; set; }
 
-        public System.Data.Entity.DbSet<Fintech.Models.ModelClass.Category>Categories { get; set; }
+        public System.Data.Entity.DbSet<Fintech.Models.ModelClass.Category> Categories { get; set; }
 
     }
 }

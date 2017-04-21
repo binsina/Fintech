@@ -11,17 +11,60 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Fintech.Models;
+using System.Web.Configuration;
+using System.Net.Mail;
+using System.Net;
 
 namespace Fintech
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await SendMailAsync(message);
         }
-    }
+        public async Task<bool> SendMailAsync(IdentityMessage message)
+        {
+
+            //Private.Config setting
+            var SMTP_USERNAME = WebConfigurationManager.AppSettings["SMTP_USERNAME"];
+            var SMTP_PASSWORD = WebConfigurationManager.AppSettings["SMTP_PASSWORD"];
+            var HOST = WebConfigurationManager.AppSettings["HOST"];
+            int PORT = Convert.ToInt32(WebConfigurationManager.AppSettings["PORT"]);
+            //Email coming From: it will say=> BugTracker
+            var FROM = new MailAddress(WebConfigurationManager.AppSettings["emailfrom"], "BugTracker");
+
+            var email = new MailMessage(FROM, new MailAddress
+                (message.Destination))
+
+            {
+                Subject = message.Subject,
+                Body = message.Body,
+                IsBodyHtml = true,
+            };
+            //STMP Object set-up
+            using (var smtp = new SmtpClient()
+            {
+                Host = HOST,
+                Port = PORT,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(SMTP_USERNAME, SMTP_PASSWORD)
+            })
+                try
+                {
+                    await smtp.SendMailAsync(email);
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return false;
+                }
+        }
+
+    };
 
     public class SmsService : IIdentityMessageService
     {

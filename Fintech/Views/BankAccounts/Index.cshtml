@@ -5,7 +5,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create","BankAccounts",new {HouseHoldId = Model.HouseHoldId }, new { @class = "btn btn-primary"} )
+    @Html.ActionLink("Create Bank Account", "Create","BankAccounts",new {HouseHoldId = Model.HouseHoldId }, new { @class = "btn btn-primary"} )
 </p>
 
   
@@ -31,7 +31,9 @@
         <th>
             @Html.DisplayName("Account Created")
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayName("User Options")
+        </th>
     </tr>
 
 @foreach (var item in Model.BA) {
