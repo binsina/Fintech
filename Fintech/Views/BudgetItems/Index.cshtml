@@ -40,7 +40,7 @@
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            @Html.ActionLink("Back to HouseHolds", "Index", "HouseHolds", new { @class = "btn btn-primary"})
+            @Html.ActionLink("Back to HouseHolds", "Index", "HouseHolds", new {HouseHoldId = Model.BudgetId }, new { @class = "btn btn-primary"})
         </td>
     </tr>
 }

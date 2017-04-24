@@ -25,7 +25,7 @@ namespace Fintech.Models
 
         public int HouseHoldId { get; set; }
 
-        //public virtual HouseHold HouseHold { get; set; }
+        public virtual HouseHold HouseHold { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
 
 
@@ -44,44 +44,10 @@ namespace Fintech.Models
             // Add custom user claims here
             return userIdentity;
         }
-        public virtual HouseHold HouseHold { get; set; }
+        //public virtual HouseHold HouseHold { get; set; }
     }
 
-    public static class AuthExtensions
-    {
-        public static string GetHouseHoldId(this IIdentity user)
-        {
-            var claimsIdentity = (ClaimsIdentity)user;
-            var HouseHoldClaims = claimsIdentity.Claims.FirstOrDefault(m => m.Type == "HouseHoldId");
-            if (HouseHoldClaims != null)
-            {
-                return HouseHoldClaims.Value;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public static bool IsInHouseHoldId(this IIdentity user)
-        {
-            var HouseholdClaims = ((ClaimsIdentity)user).Claims.FirstOrDefault(m => m.Type == "HouseHoldId");
-            return HouseholdClaims != null && string.IsNullOrWhiteSpace(HouseholdClaims.Value);
-        }
-
-        public static async Task RefreshAuthentication(this HttpContextBase context, ApplicationUser user)
-        {
-            context.GetOwinContext().Authentication.SignOut();
-            await context.GetOwinContext().Get<ApplicationSignInManager>().SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-            
-        }
-
-
-
-
-
-    }
+   
 
     
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

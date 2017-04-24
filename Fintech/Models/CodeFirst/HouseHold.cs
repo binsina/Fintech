@@ -18,7 +18,7 @@ namespace Fintech.Models.ModelClass
 
 
         public int Id { get; set; }
-        [Required]
+        //[Required]
         [Display(Name = "HouseHold Name")]
         public string Name { get; set; }
 

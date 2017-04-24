@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Fintech.Models;
 using Fintech.Models.ModelClass;
+using Fintech.HelperClass;
 
 namespace Fintech.Controllers
 {
@@ -23,9 +24,25 @@ namespace Fintech.Controllers
             var bankAccounts = db.BankAccounts
                 .Where(m => m.HouseHoldId == HouseHoldId)
                 .Include(b => b.HouseHold);
+
+            var newBalance = bankAccounts.Where(m => m.HouseHoldId == HouseHoldId)
+                .Include(b => b.Balance);
+            var oldBalance = bankAccounts.Where(m=>m.HouseHoldId == HouseHoldId).Include(b=>b.Transactions);
+
+            //var NewReconciledBalance = newBalance - oldBalance;
+
+            //var a = db.BankAccounts.Select(b => new
+            //{
+            //    NewBalance = b.Balance,
+            //    total = Sum(m=>m.Balance)),
+            //});
                
+
+
             model.BA = bankAccounts.ToList();
             model.HouseHoldId = HouseHoldId;
+
+
             return View(model);
 
             //return View(bankAccounts.ToList());
@@ -47,12 +64,12 @@ namespace Fintech.Controllers
         }
 
         // GET: BankAccounts/Create
-        
+        //[AuthorizeHouseHold]
         public ActionResult Create(int HouseHoldId)
         {
             BankAccount bankAccount = new BankAccount();
-            bankAccount.HouseHoldId = HouseHoldId;
-
+            bankAccount.HouseHoldId = User.Identity.GetHouseHoldId().Value;
+            
 
             return View(bankAccount);
         }
