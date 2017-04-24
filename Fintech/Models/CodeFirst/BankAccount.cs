@@ -25,6 +25,8 @@ namespace Fintech.Models.ModelClass
 
         public decimal Balance { get; set; }
 
+
+
         public bool ReconciledBalance { get; set; }
 
         public bool SoftDelete { get; set; }

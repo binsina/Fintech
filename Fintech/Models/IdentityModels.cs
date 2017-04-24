@@ -23,7 +23,7 @@ namespace Fintech.Models
         public string LastName { get; set; }
         public string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
 
-        public int HouseHoldId { get; set; }
+        public int? HouseHoldId { get; set; }
 
         public virtual HouseHold HouseHold { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }

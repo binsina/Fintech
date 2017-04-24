@@ -287,8 +287,7 @@
     <Content Include="Views\Transactions\Details.cshtml" />
     <Content Include="Views\Transactions\Edit.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
-    <Content Include="Views\Home\JoinHouseHold.cshtml" />
-    <Content Include="Views\Home\CreateHouseHold.cshtml" />
+    <Content Include="Views\Home\CreateJoinHouseHold.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

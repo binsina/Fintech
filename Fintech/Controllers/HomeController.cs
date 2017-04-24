@@ -14,8 +14,18 @@ namespace Fintech.Controllers
 
     {
         ApplicationDbContext db = new ApplicationDbContext();
+
+        //get
+        [Authorize]
+        public ActionResult CreateJoinHouseHold(HouseHoldViewModel model)
+        {
+            HouseHoldViewModel vm = new HouseHoldViewModel();
+            return View(vm);
+        }
+
+
         //Get
-        //[Authorize]
+        [Authorize]
         public ActionResult JoinHouseHold(HouseHoldViewModel model)
         {
             HouseHold hh = db.HouseHolds.Find(model.HHId);

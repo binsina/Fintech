@@ -25,22 +25,9 @@ namespace Fintech.Controllers
                 .Where(m => m.HouseHoldId == HouseHoldId)
                 .Include(b => b.HouseHold);
 
-            var newBalance = bankAccounts.Where(m => m.HouseHoldId == HouseHoldId)
-                .Include(b => b.Balance);
-            var oldBalance = bankAccounts.Where(m=>m.HouseHoldId == HouseHoldId).Include(b=>b.Transactions);
-
-            //var NewReconciledBalance = newBalance - oldBalance;
-
-            //var a = db.BankAccounts.Select(b => new
-            //{
-            //    NewBalance = b.Balance,
-            //    total = Sum(m=>m.Balance)),
-            //});
-               
-
-
             model.BA = bankAccounts.ToList();
             model.HouseHoldId = HouseHoldId;
+            //ViewBag.TotalAccountBalance = db.BankAccounts.Select(m => m.Transactions.Where(p => p.Type == false).Sum(n =>n.Amount));
 
 
             return View(model);
@@ -60,6 +47,15 @@ namespace Fintech.Controllers
             {
                 return HttpNotFound();
             }
+
+
+            var Debt = bankAccount.Transactions.Where(m => m.Type == false).Sum(m => m.Amount);
+           bankAccount.Balance = bankAccount.Balance - Debt;
+
+            var Credit = bankAccount.Transactions.Where(m => m.Type == true).Sum(m => m.Amount);
+            bankAccount.Balance = bankAccount.Balance + Credit;
+            ViewBag.TotalBalance = bankAccount.Balance;
+
             return View(bankAccount);
         }
 
