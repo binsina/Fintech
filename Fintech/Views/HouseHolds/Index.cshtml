@@ -10,26 +10,40 @@
     @Html.ActionLink("Create New HouseHold", "Create",null,new { @class = "btn btn-primary"})
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            <th>
+                <span>@Html.DisplayName("Current HouseHold you Belong To:")</span>
+            </th>
+            <th>@Html.DisplayName("Options")</th>
+        </tr>
+    </thead>
+@foreach (var item in Model)
+{ 
+    <tbody>
+       
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })|
-            @Html.ActionLink("Accounts","Index","bankAccounts",new {HouseHoldId = item.Id }, new { @class= "btn btn-primary"})|
-            @Html.ActionLink("Budgets","Index","Budgets", new { HouseHoldId = item.Id}, new { @class= "btn btn-primary"})
-        </td>
-    </tr>
-}
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })|
+                @Html.ActionLink("Accounts", "Index", "bankAccounts", new { HouseHoldId = item.Id }, new { @class = "btn btn-primary" })|
+                @Html.ActionLink("Budgets", "Index", "Budgets", new { HouseHoldId = item.Id }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    </tbody>
+    }
 
 </table>
+
+
+
+<script>
+$(document).ready(function(){
+    $(".Table").DataTable();
+});
+</script>
