@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Fintech.Models.ModelClass.HouseHold>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -123,10 +123,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <!--/down-->
             <div class="down">
                 @*<a href="index.html"><img src="~/admin/images/1.png" width="75" height="75"></a>*@
+
+    <img src="@Url.Action("UserPhotos", "Home" )" style="width:160px;height:160px; background: #FFFFFF;
+    margin: auto;
+    -moz-border-radius: 60px;
+    border-radius: 100px;
+    padding: 6px;
+    box-shadow: 0px 0px 20px #888;" />
+
 @using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-                 <a href="index.html"><img src="~/admin/images/AdminPicture.png" width="75" height="75"></a>
                 <a href="index.html"><span class=" name-caret">@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</span></a>
             
 }
@@ -143,14 +150,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
             </div>
             <!--//down-->
+           
             <div class="menu">
                 <ul id="menu">
                     <li><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
                     <li id="menu-academico">
                         <a href="#"><i class="fa fa-table"></i> <span> Tabs &amp; HouseHolds</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                         <ul id="menu-academico-sub">
-                            <li id="menu-academico-avaliacoes"><a href="tabs.html">My HouseHolds </a></li>
-                            <li id="menu-academico-boletim"><a href="widget.html">Create HouseHold</a></li>
+                            <li id="menu-academico-avaliacoes"><a href="@Url.Action("Index", "HouseHolds")">My HouseHolds </a></li>
+                            <li id="menu-academico-boletim"><a href="@Url.Action("Create", "HouseHolds")">Create HouseHold</a></li>
                             
 
                         </ul>
@@ -158,10 +166,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li id="menu-academico">
                         <a href="#"><i class="fa fa-file-text-o"></i> <span>Accounts</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                         <ul id="menu-academico-sub">
-                            <li id="menu-academico-avaliacoes"><a href="forms.html">My Accounts</a></li>
-                            <li id="menu-academico-boletim"><a href="validation.html">Add Account</a></li>
-                            <li id="menu-academico-boletim"><a href="table.html">Tables</a></li>
-                            <li id="menu-academico-boletim"><a href="buttons.html">Buttons</a></li>
+                            <li id="menu-academico-avaliacoes"><a href="@Url.Action("Index","BankAccounts")">My Accounts</a></li>
+                            <li id="menu-academico-boletim"><a href="@Url.Action("Create","BankAccounts")">Add Account</a></li>
+                            
                         </ul>
                     </li>
                     <li id="menu-academico">
@@ -183,8 +190,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     
                    
                 </ul>
+               
             </div>
+            
         </div>
+           
             @*the end of left side menu*@
         <div class="clearfix"></div>
     </div>

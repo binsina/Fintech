@@ -74,6 +74,8 @@ namespace Fintech.Controllers
             if (ModelState.IsValid)
             {
                 transaction.UserId = User.Identity.GetUserId();
+                transaction.EnteredById = User.Identity.Name;
+
                 transaction.Date = DateTime.Now;
                 db.Transactions.Add(transaction);
                 db.SaveChanges();

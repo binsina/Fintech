@@ -89,7 +89,9 @@ namespace Fintech.Models
         [Display(Name = "LastName")]
         public string LastName { get; set; }
 
-       
+
+        [Display(Name = "UserPhoto")]
+        public byte[] UserPhoto { get; set; }
 
 
 

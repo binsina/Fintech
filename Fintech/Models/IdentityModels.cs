@@ -27,7 +27,7 @@ namespace Fintech.Models
 
         public virtual HouseHold HouseHold { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
-
+        public byte[] UserPhoto { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
