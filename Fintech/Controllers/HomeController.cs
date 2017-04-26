@@ -1,4 +1,4 @@
-﻿
+﻿using Fintech.HelperClass;
 using Fintech.Models;
 using Fintech.Models.ModelClass;
 using Microsoft.AspNet.Identity;
@@ -44,11 +44,12 @@ namespace Fintech.Controllers
         public ActionResult CreateHouseHold(HouseHoldViewModel model)
         {
             HouseHold hh = new HouseHold();
+          
+
             hh.Name = model.HHName;
-
+          
             model.Member = db.Users.Find(User.Identity.GetUserId());
-
-            db.HouseHolds.Add(hh);
+              db.HouseHolds.Add(hh);
             db.SaveChanges();
 
             hh.Users.Add(model.Member);

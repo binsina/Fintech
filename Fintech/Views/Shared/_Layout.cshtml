@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Fintech.Models.ModelClass.HouseHold>
+﻿
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -14,7 +14,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <meta name="keywords" content="Augment Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- Bootstrap Core CSS -->
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+     <!-- Bootstrap Core CSS -->
     <link href="~/admin/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <!-- Custom CSS -->
     <link href="~/admin/css/style.css" rel='stylesheet' type='text/css' />
@@ -54,46 +57,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <li>@Html.ActionLink("HouseHold", "Index", "HouseHolds")</li>
                                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                     </ul>
-                                   @Html.Partial("_LoginPartial")
+                                    @Html.Partial("_LoginPartial")
                                 </div>
                             </div>
                         </div>
 
-                      
-                                        
-                                
-                               
-                                       
-                                <div class="clearfix"></div>
-                            @*</ul>*@
-                        </div>
                         <div class="clearfix"></div>
-                        <!--//profile_details-->
+                        @*</ul>*@
                     </div>
-                    <!--//menu-right-->
                     <div class="clearfix"></div>
+                    <!--//profile_details-->
                 </div>
-                <!-- //header-ends -->
-                <!--outter-wp-->
-                <div class="outter-wp">
-                    <!--sub-heard-part-->
-                    @*<div class="sub-heard-part">
+                <!--//menu-right-->
+                <div class="clearfix"></div>
+            </div>
+            <!-- //header-ends -->
+            <!--outter-wp-->
+            <div class="outter-wp">
+                <!--sub-heard-part-->
+                @*<div class="sub-heard-part">
                         <ol class="breadcrumb m-b-0">
                             <li><a href="index.html">Home</a></li>
                             <li class="active">Profile</li>
                         </ol>
                     </div>*@
-                    <!--//sub-heard-part-->
-                    <!--/profile-->
-                    @*<h3 class="sub-tittle pro">Profile</h3>
+                <!--//sub-heard-part-->
+                <!--/profile-->
+                @*<h3 class="sub-tittle pro">Profile</h3>
                     <div class="profile-widget">
                         <img src="~/admin/images/admin1.jpg" alt=" " />
                         <h2>Jasmin Leo</h2>
                         <p>Admin</p>
                     </div>*@
-                    <!--/profile-inner-->
-                    @RenderBody()
-                      
+                <!--/profile-inner-->
+                @RenderBody()
                 <!--//outer-wp-->
                 <!--footer section start-->
                 <footer>
@@ -103,9 +100,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
         <!--//content-inner-->
-
-
-            @*begining of the left side menu*@
+        @*begining of the left side menu*@
         <!--/sidebar-menu-->
         <br />
         <br />
@@ -124,33 +119,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="down">
                 @*<a href="index.html"><img src="~/admin/images/1.png" width="75" height="75"></a>*@
 
-    <img src="@Url.Action("UserPhotos", "Home" )" style="width:160px;height:160px; background: #FFFFFF;
+                <img src="@Url.Action("UserPhotos", "Home" )" style="width:160px;height:160px; background: #FFFFFF;
     margin: auto;
     -moz-border-radius: 60px;
     border-radius: 100px;
     padding: 6px;
     box-shadow: 0px 0px 20px #888;" />
 
-@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
+                @using Microsoft.AspNet.Identity
+                @if (Request.IsAuthenticated)
+                {
                 <a href="index.html"><span class=" name-caret">@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</span></a>
-            
-}
+
+                }
 
                 <ul>
                     @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-primary" })<i class="lnr lnr-user"></i></li>
-                    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-primary" })<i class="lnr lnr-cog"></i></li>*@
+                        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-primary" })<i class="lnr lnr-cog"></i></li>*@
 
 
                     @*<li><a class="tooltips" href="index.html"><span>Profile</span><i class="lnr lnr-user"></i></a></li>
-                    <li><a class="tooltips" href="index.html"><span>Settings</span><i class="lnr lnr-cog"></i></a></li>
-                    <li><a class="tooltips" href="index.html"><span>Log out</span><i class="lnr lnr-power-switch"></i></a></li>*@
+                        <li><a class="tooltips" href="index.html"><span>Settings</span><i class="lnr lnr-cog"></i></a></li>
+                        <li><a class="tooltips" href="index.html"><span>Log out</span><i class="lnr lnr-power-switch"></i></a></li>*@
                 </ul>
 
             </div>
             <!--//down-->
-           
+
             <div class="menu">
                 <ul id="menu">
                     <li><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
@@ -159,7 +154,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul id="menu-academico-sub">
                             <li id="menu-academico-avaliacoes"><a href="@Url.Action("Index", "HouseHolds")">My HouseHolds </a></li>
                             <li id="menu-academico-boletim"><a href="@Url.Action("Create", "HouseHolds")">Create HouseHold</a></li>
-                            
+
 
                         </ul>
                     </li>
@@ -168,14 +163,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul id="menu-academico-sub">
                             <li id="menu-academico-avaliacoes"><a href="@Url.Action("Index","BankAccounts")">My Accounts</a></li>
                             <li id="menu-academico-boletim"><a href="@Url.Action("Create","BankAccounts")">Add Account</a></li>
-                            
+
                         </ul>
                     </li>
                     <li id="menu-academico">
                         <a href="#"><i class="fa fa-file-text-o"></i> <span>Budgets</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                         <ul id="menu-academico-sub">
                             <li id="menu-academico-avaliacoes"><a href="forms.html">Budget Items</a></li>
-                            
+
                         </ul>
                     </li>
                     <li id="menu-academico">
@@ -183,46 +178,52 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul id="menu-academico-sub">
                             <li id="menu-academico-avaliacoes"><a href="forms.html">My Categories</a></li>
                             <li id="menu-academico-boletim"><a href="validation.html">Add Categories</a></li>
-                            
+
                         </ul>
                     </li>
-                   
-                    
-                   
+
+
+
                 </ul>
-               
             </div>
-            
+
         </div>
-           
-            @*the end of left side menu*@
+
+        @*the end of left side menu*@
         <div class="clearfix"></div>
+
     </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+
     <script>
-							var toggle = true;
+        var toggle = true;
 
-							$(".sidebar-icon").click(function() {
-							  if (toggle)
-							  {
-								$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-								$("#menu span").css({"position":"absolute"});
-							  }
-							  else
-							  {
-								$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-								setTimeout(function() {
-								  $("#menu span").css({"position":"relative"});
-								}, 400);
-							  }
+        $(".sidebar-icon").click(function () {
+            if (toggle) {
+                $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+                $("#menu span").css({ "position": "absolute" });
+            }
+            else {
+                $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+                setTimeout(function () {
+                    $("#menu span").css({ "position": "relative" });
+                }, 400);
+            }
 
-											toggle = !toggle;
-										});
+            toggle = !toggle;
+        });
     </script>
     <!--js -->
     <script src="~/admin/js/jquery.nicescroll.js"></script>
     <script src="~/admin/js/scripts.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="~/admin/js/bootstrap.min.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+ 
 </body>
 </html>
 
@@ -231,73 +232,73 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 @*<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                </ul>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
 
-    @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>*@
+
+
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>*@
+
+@*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+
+@*</head>
+    <body>
+
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>*@
+
+@*@Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
-</html>*@
-
-
-
-                    @*<!DOCTYPE html>
-                    <html>
-                    <head>
-                        <meta charset="utf-8" />
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>@ViewBag.Title - My ASP.NET Application</title>*@
-                        
-                            @Styles.Render("~/Content/css")
-                        @Scripts.Render("~/bundles/modernizr")
-
-                    @*</head>
-                    <body>
-                       
-
-                        <div class="container body-content">
-                            @RenderBody()
-                            <hr />
-                            <footer>
-                                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-                            </footer>
-                        </div>*@
-
-                        @Scripts.Render("~/bundles/jquery")
-                        @Scripts.Render("~/bundles/bootstrap")
-                        @RenderSection("scripts", required: false)
-                    @*</body>
-                </html>*@
+    @RenderSection("scripts", required: false)*@
+@*</body>
+    </html>*@

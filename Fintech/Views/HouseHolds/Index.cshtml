@@ -1,28 +1,29 @@
 ﻿@model IEnumerable<Fintech.Models.ModelClass.HouseHold>
 
+
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-<script>
-    //cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css
-</script>
+
+
 <p>
-    @Html.ActionLink("Create New HouseHold", "Create",null,new { @class = "btn btn-primary"})
+    @Html.ActionLink("Create New HouseHold", "CreateJoinHouseHold","Home",null,new { @class = "btn btn-primary"})
 </p>
-<table class="table">
-    <thead>
+<table>
+    
         <tr>
             <th>
                 <span>@Html.DisplayName("Current HouseHold you Belong To:")</span>
             </th>
             <th>@Html.DisplayName("Options")</th>
         </tr>
-    </thead>
+   
 @foreach (var item in Model)
 { 
-    <tbody>
+   
        
 
         <tr>
@@ -33,19 +34,19 @@
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary" }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })|
-                @Html.ActionLink("Accounts", "Index", "bankAccounts", new { HouseHoldId = item.Id }, new { @class = "btn btn-primary" })|
+                @Html.ActionLink("Accounts", "Index", "BankAccounts", new { HouseHoldId = item.Id }, new { @class = "btn btn-primary" })|
                 @Html.ActionLink("Budgets", "Index", "Budgets", new { HouseHoldId = item.Id }, new { @class = "btn btn-primary" })
             </td>
         </tr>
-    </tbody>
+    
     }
 
 </table>
 
 
 
-<script>
+@*<script>
 $(document).ready(function(){
     $(".Table").DataTable();
 });
-</script>
+</script>*@

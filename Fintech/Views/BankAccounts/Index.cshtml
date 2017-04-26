@@ -1,71 +1,66 @@
-﻿@*@model IEnumerable<Fintech.Models.BankAccountViewModels>*@
+﻿@model Fintech.Models.BankAccountViewModel
 
-@model Fintech.Models.BankAccountViewModels
-
-<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create Bank Account", "Create","BankAccounts",new {HouseHoldId = Model.HouseHoldId }, new { @class = "btn btn-primary"} )
+    @Html.ActionLink("Create Bank Account", "Create", "BankAccounts", new { HouseHoldId = Model.HouseHoldId }, new { @class = "btn btn-primary" })
 </p>
 
-  
-<p>
-   @ViewBag.TotalAccountBalance
-</p>
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("HouseHold")
-        </th>
-        <th>
-            @Html.DisplayName("Account Name")
-        </th>
-        <th>
-            @Html.DisplayName("Balance")
-        </th>
-        <th>
-            @Html.DisplayName("ReconciledBalance")
-        </th>
-        <th>
-            @Html.DisplayName("Soft Delete")
-        </th>
-        <th>
-            @Html.DisplayName("Account Created")
-        </th>
-        <th>
-            @Html.DisplayName("User Options")
-        </th>
-    </tr>
-
-@foreach (var item in Model.BA) {
-    
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.HouseHold.Name)
-        </td>
-        <td>
-            @item.Name
-        </td>
-        <td>
-            @item.Balance
-        </td>
-        <td>
-            @item.ReconciledBalance
-        </td>
-        <td>
-            @item.SoftDelete
-        </td>
-        <td>
-            @item.Date.DateTime.ToLongDateString()
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })|
-            @Html.ActionLink("Transaction","Index","Transactions",new { BankAccountId = item.Id}, new { @class="btn btn-primary"})
-        </td>
-    </tr>
-}
-
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("HouseHold")
+            </th>
+            <th>
+                @Html.DisplayName("Account Name")
+            </th>
+            <th>
+                @Html.DisplayName("Balance")
+            </th>
+            <th>
+                @Html.DisplayName("ReconciledBalance")
+            </th>
+            <th>
+                @Html.DisplayName("Soft Delete")
+            </th>
+            <th>
+                @Html.DisplayName("Account Created")
+            </th>
+            <th>
+                @Html.DisplayName("User Options")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.BA)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HouseHold.Name)
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Balance
+                </td>
+                <td>
+                    @item.ReconciledBalance
+                </td>
+                <td>
+                    @item.SoftDelete
+                </td>
+                <td>
+                    @item.Date.DateTime.ToLongDateString()
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })|
+                    @Html.ActionLink("Transaction", "Index", "Transactions", new { BankAccountId = item.Id }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

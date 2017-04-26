@@ -19,16 +19,15 @@ namespace Fintech.Controllers
         // GET: BankAccounts
         public ActionResult Index(int HouseHoldId)
         {
-            BankAccountViewModels model = new BankAccountViewModels();
-
+            BankAccountViewModel model = new BankAccountViewModel();
+            
             var bankAccounts = db.BankAccounts
                 .Where(m => m.HouseHoldId == HouseHoldId)
                 .Include(b => b.HouseHold);
 
             model.BA = bankAccounts.ToList();
             model.HouseHoldId = HouseHoldId;
-            //ViewBag.TotalAccountBalance = db.BankAccounts.Select(m => m.Transactions.Where(p => p.Type == false).Sum(n =>n.Amount));
-
+            
 
             return View(model);
 

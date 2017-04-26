@@ -6,12 +6,12 @@ using System.Web;
 
 namespace Fintech.Models
 {
-    public class BankAccountViewModels
+    public class BankAccountViewModel
     {
 
         public int HouseHoldId { get; set; } 
 
-        
+       
         public List<BankAccount> BA { get; set; }
 
 
