@@ -19,6 +19,7 @@ namespace Fintech.Controllers
         // GET: BankAccounts
         public ActionResult Index(int HouseHoldId)
         {
+            ViewBag.Id = HouseHoldId;
             BankAccountViewModel model = new BankAccountViewModel();
             
             var bankAccounts = db.BankAccounts
@@ -48,10 +49,10 @@ namespace Fintech.Controllers
             }
 
 
-            var Debt = bankAccount.Transactions.Where(m => m.Type == false).Sum(m => m.Amount);
+            var Debt = bankAccount.Transactions.Where(m => m.Type == true).Sum(m => m.Amount);
            bankAccount.Balance = bankAccount.Balance - Debt;
 
-            var Credit = bankAccount.Transactions.Where(m => m.Type == true).Sum(m => m.Amount);
+            var Credit = bankAccount.Transactions.Where(m => m.Type == false).Sum(m => m.Amount);
             bankAccount.Balance = bankAccount.Balance + Credit;
             ViewBag.TotalBalance = bankAccount.Balance;
 
@@ -76,7 +77,7 @@ namespace Fintech.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,HouseHoldId,Name,Balance,ReconciledBalance,SoftDelete,Date")] BankAccount bankAccount)
         {
-
+            ViewBag.Id = bankAccount.HouseHoldId;
             if (ModelState.IsValid)
             {
                 bankAccount.Date = DateTimeOffset.Now;

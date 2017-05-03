@@ -1,47 +1,62 @@
-﻿@model IEnumerable<Fintech.Models.ModelClass.HouseHold>
+﻿@*@model IEnumerable<Fintech.Models.ModelClass.HouseHold>*@
+
+@model Fintech.Models.ModelClass.HouseHold
+@using Fintech.HelperClass
 
 
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
 
 
-<p>
+
+
+
+
+
+
+
+@*<p>
     @Html.ActionLink("Create New HouseHold", "CreateJoinHouseHold","Home",null,new { @class = "btn btn-primary"})
-</p>
-<table>
-    
+</p>*@
+
+<table class="Table">
+    <thead>
         <tr>
+
             <th>
-                <span>@Html.DisplayName("Current HouseHold you Belong To:")</span>
+                <span>@Html.DisplayName("Current HouseHold:")</span>
             </th>
-            <th>@Html.DisplayName("Options")</th>
+
+
         </tr>
-   
-@foreach (var item in Model)
-{ 
-   
-       
+    </thead>
+
+
+
+    <tbody>
 
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary" }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })|
-                @Html.ActionLink("Accounts", "Index", "BankAccounts", new { HouseHoldId = item.Id }, new { @class = "btn btn-primary" })|
-                @Html.ActionLink("Budgets", "Index", "Budgets", new { HouseHoldId = item.Id }, new { @class = "btn btn-primary" })
-            </td>
-        </tr>
-    
-    }
 
+            <td>
+                @Model.Name
+            </td>
+
+        </tr>
+    </tbody>
 </table>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Details", "Details", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+    <a href="@Url.Action("Delete", "Delete", new { id = Model.Id})"><img src="~/Content/images/trashcan.png" height="30" width="30" data-toggle="tooltip" title="Delete HouseHold!" /></a>|
+     <a href="@Url.Action("Index", "BankAccounts", new { HouseHoldId = Model.Id})"><img src="~/Content/images/bankaccount.png" height="42" width="42" data-toggle="tooltip" title="See BankAccount!" /></a>|
+    <a href="@Url.Action("Index", "Budgets", new { HouseHoldId = Model.Id})"><img src="~/Content/images/budget.png" height="42" width="42" data-toggle="tooltip" title="See Budgets!" /></a>
+
+    
+</div>
+
+
+
+
+
 
 
 
@@ -50,3 +65,11 @@ $(document).ready(function(){
     $(".Table").DataTable();
 });
 </script>*@
+
+<script>
+	$(document).ready(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+</script>
+
+

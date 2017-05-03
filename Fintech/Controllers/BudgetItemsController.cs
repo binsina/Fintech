@@ -19,7 +19,7 @@ namespace Fintech.Controllers
         public ActionResult Index(int BudgetId)
         {
             BudgetItemViewModels model = new BudgetItemViewModels();
-
+            ViewBag.Id = BudgetId;
             var budgetItems = db.BudgetItems
                 .Where(n=> n.BudgetId == BudgetId)
                 .Include(b => b.Budget).
@@ -66,6 +66,7 @@ namespace Fintech.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,CategoryId,BudgetId,Amount")] BudgetItem budgetItem)
         {
+            ViewBag.Id = budgetItem.BudgetId;
             if (ModelState.IsValid)
             {
                 db.BudgetItems.Add(budgetItem);

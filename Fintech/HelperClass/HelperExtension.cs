@@ -54,6 +54,7 @@ namespace Fintech.HelperClass
             return (hid != null && string.IsNullOrWhiteSpace(hid.Value));
         }
 
+
         public static async Task RefreshAuthentication(this HttpContextBase context, ApplicationUser user)
         {
             context.GetOwinContext().Authentication.SignOut();

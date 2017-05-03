@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 
@@ -40,9 +41,11 @@ namespace Fintech.Models.ModelClass
         public int ReconciledAmount { get; set; }
 
         public string EnteredById { get; set; }
+        public string UserFullNameId { get; set; }
 
         public virtual BankAccount BankAccount { get; set; }
         public virtual ApplicationUser EnteredBy{ get; set; }
+        public virtual ClaimsIdentity UserFullName { get; set; }
         public virtual Category Category { get; set; }
     }
 }

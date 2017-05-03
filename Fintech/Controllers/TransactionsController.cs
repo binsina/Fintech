@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Fintech.Models;
 using Fintech.Models.ModelClass;
 using Microsoft.AspNet.Identity;
+using System.Security.Claims;
 
 namespace Fintech.Controllers
 {
@@ -73,9 +74,10 @@ namespace Fintech.Controllers
         {
             if (ModelState.IsValid)
             {
+                //var Tuser = db.Users.FirstOrDefault(g=>g.FirstName);
                 transaction.UserId = User.Identity.GetUserId();
-                transaction.EnteredById = User.Identity.Name;
 
+                //transaction.EnteredById = ((ClaimsIdentity)User.Identity).FindFirst("FullName");
                 transaction.Date = DateTime.Now;
                 db.Transactions.Add(transaction);
                 db.SaveChanges();

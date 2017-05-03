@@ -18,6 +18,8 @@ namespace Fintech.Controllers
         // GET: Budgets
         public ActionResult Index(int HouseHoldId)
         {
+            ViewBag.Id = HouseHoldId;
+
             BudgetViewModels model = new BudgetViewModels();
 
             var budgets = db.Budgets
@@ -63,6 +65,7 @@ namespace Fintech.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,HouseHoldId")] Budget budget)
         {
+            ViewBag.Id = budget.HouseHoldId;
             if (ModelState.IsValid)
             {
                 db.Budgets.Add(budget);

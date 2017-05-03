@@ -175,12 +175,18 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HouseHoldsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HelperClass\HelperExtension.cs" />
+    <Compile Include="HelperClass\ImageAction.cs" />
     <Compile Include="HelperClass\ImageUploadValidator.cs" />
+    <Compile Include="Migrations\201705012026541_Invite.cs" />
+    <Compile Include="Migrations\201705012026541_Invite.Designer.cs">
+      <DependentUpon>201705012026541_Invite.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuthorizeHouseHold.cs" />
@@ -192,6 +198,7 @@
     <Compile Include="Models\CodeFirst\BudgetItem.cs" />
     <Compile Include="Models\CodeFirst\Category.cs" />
     <Compile Include="Models\CodeFirst\HouseHold.cs" />
+    <Compile Include="Models\CodeFirst\Invite.cs" />
     <Compile Include="Models\CodeFirst\Transaction.cs" />
     <Compile Include="Models\HouseHoldToUserViewModels.cs" />
     <Compile Include="Models\HouseHoldViewModel.cs" />
@@ -482,10 +489,28 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\images\bankaccount.png" />
+    <Content Include="Content\images\budget.png" />
+    <Content Include="Content\images\HouseHold.jpg" />
+    <Content Include="Content\images\HouseHold1.png" />
+    <Content Include="Content\images\leaves.gif" />
+    <Content Include="Content\images\money.gif" />
+    <Content Include="Content\images\Moneybag.jpg" />
+    <Content Include="Content\images\trashcan.png" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
+    <Content Include="Content\sweetalert\docs.css" />
+    <Content Include="Content\sweetalert\sweet-alert.css" />
+    <Content Include="Content\sweetalert\thumbs-up.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\images\4.png" />
+    <Content Include="Content\images\5.png" />
+    <Content Include="Content\images\arrow.png" />
+    <Content Include="Content\images\carrow.png" />
+    <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Private.config" />
@@ -519,6 +544,12 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="Content\sweetalert\sweet-alert.less" />
+    <Content Include="Content\sweetalert\sweet-alert-combine.less" />
+    <Content Include="Content\sweetalert\sweet-alert-animations.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -605,6 +636,47 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="sweetalert\dev\gulpfile-wrap-template.js" />
+    <Content Include="sweetalert\dev\ie9.css" />
+    <Content Include="sweetalert\dev\loader-animation.css" />
+    <Content Include="sweetalert\dev\modules\default-params.js" />
+    <Content Include="sweetalert\dev\modules\handle-click.js" />
+    <Content Include="sweetalert\dev\modules\handle-dom.js" />
+    <Content Include="sweetalert\dev\modules\handle-key.js" />
+    <Content Include="sweetalert\dev\modules\handle-swal-dom.js" />
+    <Content Include="sweetalert\dev\modules\injected-html.js" />
+    <Content Include="sweetalert\dev\modules\set-params.js" />
+    <Content Include="sweetalert\dev\modules\utils.js" />
+    <Content Include="sweetalert\dev\sweetalert.es6.js" />
+    <Content Include="sweetalert\dist\sweetalert-dev.js" />
+    <Content Include="sweetalert\dist\sweetalert.css" />
+    <Content Include="sweetalert\dist\sweetalert.min.js" />
+    <Content Include="sweetalert\example\example.css" />
+    <Content Include="sweetalert\example\images\logo_big%402x.png" />
+    <Content Include="sweetalert\example\images\logo_big.png" />
+    <Content Include="sweetalert\example\images\logo_small%402x.png" />
+    <Content Include="sweetalert\example\images\logo_small.png" />
+    <Content Include="sweetalert\example\images\te-logo-small.svg" />
+    <Content Include="sweetalert\example\images\thumbs-up.jpg" />
+    <Content Include="sweetalert\example\images\vs_icon%402x.png" />
+    <Content Include="sweetalert\example\images\vs_icon.png" />
+    <Content Include="sweetalert\gulpfile.js" />
+    <Content Include="sweetalert\index.html" />
+    <Content Include="sweetalert\lib\modules\default-params.js" />
+    <Content Include="sweetalert\lib\modules\handle-click.js" />
+    <Content Include="sweetalert\lib\modules\handle-dom.js" />
+    <Content Include="sweetalert\lib\modules\handle-key.js" />
+    <Content Include="sweetalert\lib\modules\handle-swal-dom.js" />
+    <Content Include="sweetalert\lib\modules\injected-html.js" />
+    <Content Include="sweetalert\lib\modules\set-params.js" />
+    <Content Include="sweetalert\lib\modules\utils.js" />
+    <Content Include="sweetalert\lib\sweetalert.js" />
+    <Content Include="sweetalert\sweetalert.gif" />
+    <Content Include="sweetalert\test\index.html" />
+    <Content Include="sweetalert\test\tests.js" />
+    <Content Include="sweetalert\themes\facebook\facebook.css" />
+    <Content Include="sweetalert\themes\google\google.css" />
+    <Content Include="sweetalert\themes\twitter\twitter.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -670,6 +742,22 @@
     <Content Include="Views\Transactions\Edit.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
     <Content Include="Views\Home\CreateJoinHouseHold.cshtml" />
+    <Content Include="Views\HouseHolds\_ErrorPage.cshtml" />
+    <Content Include="Views\Sweet\Alert.cshtml" />
+    <Content Include="sweetalert\.editorconfig" />
+    <Content Include="sweetalert\.gitignore" />
+    <Content Include="sweetalert\.jshintrc" />
+    <Content Include="sweetalert\.travis.yml" />
+    <Content Include="sweetalert\bower.json" />
+    <Content Include="sweetalert\dev\sweetalert.scss" />
+    <Content Include="sweetalert\example\example.scss" />
+    <Content Include="sweetalert\LICENSE" />
+    <Content Include="sweetalert\package.json" />
+    <Content Include="sweetalert\README.md" />
+    <Content Include="sweetalert\themes\facebook\facebook.scss" />
+    <Content Include="sweetalert\themes\google\google.scss" />
+    <Content Include="sweetalert\themes\twitter\twitter.scss" />
+    <Content Include="Views\HouseHolds\Invite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -681,6 +769,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705012026541_Invite.resx">
+      <DependentUpon>201705012026541_Invite.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

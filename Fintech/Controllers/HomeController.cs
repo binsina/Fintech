@@ -1,5 +1,7 @@
 ﻿using Fintech.HelperClass;
+
 using Fintech.Models;
+using Fintech.Models.CodeFirst;
 using Fintech.Models.ModelClass;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -7,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,52 +21,98 @@ namespace Fintech.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         //get
+      
         [Authorize]
-        public ActionResult CreateJoinHouseHold(HouseHoldViewModel model)
+        public ActionResult CreateJoinHouseHold(HouseHoldViewModel model, Guid? code)
         {
+           
+           if (User.Identity.IsInHouseHoldId())
+            {
+                return RedirectToAction("Index", "Home");
+            }
             HouseHoldViewModel vm = new HouseHoldViewModel();
+
+
+            if (code != null && ValideInvite())
+                {
+                Invite result = db.Invites.FirstOrDefault(i => i.Token == code);
+                vm.isJoinHouseHold = true;
+                vm.HHId = result.HouseHoldId;
+                vm.HHName = result.HouseHold.Name;
+
+                result.hasbeenUsed = true;
+
+                ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+                user.InviteEmail = result.Email;
+                db.SaveChanges();
+            }
+
+
             return View(vm);
         }
 
+        
+
+
+        private bool ValideInvite()
+        {
+            return true;
+        }
 
         //Get
         [Authorize]
-        public ActionResult JoinHouseHold(HouseHoldViewModel model)
+        public async Task<ActionResult> JoinHouseHold(HouseHoldViewModel model, Guid? code)
         {
             HouseHold hh = db.HouseHolds.Find(model.HHId);
-            model.Member = db.Users.Find(User.Identity.GetUserId());
-            hh.Users.Add(model.Member);
+            var user = db.Users.Find(User.Identity.GetUserId());
+
+            //model.Member = db.Users.Find(User.Identity.GetUserId());
+
+            hh.Users.Add(user);
+
             db.SaveChanges();
 
+
+            await ControllerContext.HttpContext.RefreshAuthentication(user);
             return RedirectToAction("Index","HouseHolds");
 
         }
 
         //Post
+        [Authorize]
         [HttpPost]
-        public ActionResult CreateHouseHold(HouseHoldViewModel model)
+        public async Task<ActionResult> CreateHouseHold(HouseHoldViewModel model)
         {
             HouseHold hh = new HouseHold();
           
-
             hh.Name = model.HHName;
-          
-            model.Member = db.Users.Find(User.Identity.GetUserId());
-              db.HouseHolds.Add(hh);
+            db.HouseHolds.Add(hh);
             db.SaveChanges();
 
-            hh.Users.Add(model.Member);
+            var user = db.Users.Find(User.Identity.GetUserId());
+            hh.Users.Add(user);
             db.SaveChanges();
+
+            await ControllerContext.HttpContext.RefreshAuthentication(user);
 
             return RedirectToAction("Index", "HouseHolds");
               
 
         }
 
-        
+        [AuthorizeHouseHold]
         public ActionResult Index()
         {
-            return View();
+            var id = User.Identity.GetHouseHoldId();
+            HouseHold HH = db.HouseHolds.Find(id);
+            if (HH == null)
+            {
+                return HttpNotFound();
+            }
+            return View(HH);
+
+
+           
         }
 
         public ActionResult About()

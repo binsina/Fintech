@@ -11,6 +11,8 @@ namespace Fintech.Models
 
         public string HHName { get; set; }
         public string InviteToken { get; set; }
+        public bool isJoinHouseHold { get; set; }
+
         public ApplicationUser Member { get; set; }
 
 

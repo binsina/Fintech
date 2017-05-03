@@ -1,4 +1,4 @@
-﻿
+﻿@using Microsoft.AspNet.Identity
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -16,7 +16,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    
+    <script src="~/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/sweetalert/dist/sweetalert.css">
      <!-- Bootstrap Core CSS -->
     <link href="~/admin/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <!-- Custom CSS -->
@@ -53,9 +54,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </div>
                                 <div class="navbar-collapse collapse">
                                     <ul class="nav navbar-nav">
-                                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                        @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
                                         <li>@Html.ActionLink("HouseHold", "Index", "HouseHolds")</li>
-                                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                                     </ul>
                                     @Html.Partial("_LoginPartial")
                                 </div>
@@ -150,10 +151,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul id="menu">
                     <li><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
                     <li id="menu-academico">
-                        <a href="#"><i class="fa fa-table"></i> <span> Tabs &amp; HouseHolds</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <a href="#"><i class="fa fa-table"></i> <span>HouseHolds</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                         <ul id="menu-academico-sub">
-                            <li id="menu-academico-avaliacoes"><a href="@Url.Action("Index", "HouseHolds")">My HouseHolds </a></li>
-                            <li id="menu-academico-boletim"><a href="@Url.Action("Create", "HouseHolds")">Create HouseHold</a></li>
+                            <li id="menu-academico-avaliacoes"><a href="@Url.Action("Index", "HouseHolds", new { HouseHoldId = User.Identity.GetUserId()})"><img src="~/Content/images/HouseHold.jpg" height="80" width="80" data-toggle="tooltip" title="See My HouseHold!" /></a></li>
+                            @*<li id="menu-academico-boletim"><a href="@Url.Action("Create", "HouseHolds")">Create HouseHold</a></li>*@
 
 
                         </ul>
@@ -161,16 +162,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li id="menu-academico">
                         <a href="#"><i class="fa fa-file-text-o"></i> <span>Accounts</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                         <ul id="menu-academico-sub">
-                            <li id="menu-academico-avaliacoes"><a href="@Url.Action("Index","BankAccounts")">My Accounts</a></li>
-                            <li id="menu-academico-boletim"><a href="@Url.Action("Create","BankAccounts")">Add Account</a></li>
+                            <li id="menu-academico-avaliacoes"><a href="@Url.Action("Index","BankAccounts", new {HouseHoldId = ViewBag.Id})">My Accounts</a></li>
+                            <li id="menu-academico-boletim"><a href="@Url.Action("Create","BankAccounts", new { HouseHoldId = ViewBag.Id})">Add Account</a></li>
+
+
 
                         </ul>
                     </li>
                     <li id="menu-academico">
-                        <a href="#"><i class="fa fa-file-text-o"></i> <span>Budgets</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <a href="@Url.Action("Index","BudgetItems", new {BudgetId = ViewBag.Id})"><i class="fa fa-file-text-o"></i> <span>Budgets</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                         <ul id="menu-academico-sub">
                             <li id="menu-academico-avaliacoes"><a href="forms.html">Budget Items</a></li>
-
+                        
                         </ul>
                     </li>
                     <li id="menu-academico">
@@ -220,6 +223,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="~/admin/js/scripts.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="~/admin/js/bootstrap.min.js"></script>
+
+    <script>
+	$(document).ready(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+    </script>
+
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

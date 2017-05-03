@@ -34,7 +34,7 @@ namespace Fintech.Models
             else
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
-                   new { controller = "HouseHolds", action = "Create" }));
+                   new { controller = "Home", action = "CreatJoinHouseHold" }));
             }
 
 

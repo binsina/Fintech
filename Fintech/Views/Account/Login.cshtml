@@ -102,7 +102,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <hr />
 
         <div class="error-btn">
-            <a class="read fourth" href="index.html">Guest Login</a>
+            @Html.ActionLink("Guest Log-in", "GuestLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl, type = "guest" }, new { @class = "btn btn-primary" })<i class="fa fa-user" aria-hidden="true"></i>
+            @*<a class="read fourth" href="index.html">Guest Login</a>*@
         </div>
         <p>&copy 2017 Wahid H. Joudrey . All Rights Reserved</p>
     </div>
